@@ -52,12 +52,6 @@ docker compose run --rm demucs-docker python cli_example.py /app/input/song.mp3 
 docker compose run --rm demucs-docker python cli_example.py /app/input/song.mp3 -m htdemucs_ft
 ```
 
-### Interactive shell
-
-```bash
-docker compose run --rm demucs-docker bash
-```
-
 ## Directory Structure
 
 - `input/` - Place your audio files here
@@ -74,8 +68,3 @@ docker compose run --rm demucs-docker bash
 - `mdx_q` - Quantized MDX
 - `mdx_extra_q` - Quantized MDX extra
 
-## Notes
-
-- The container is configured to use GPU 0 by default
-- Output files are saved in WAV format by default
-- Processing time depends on the audio length and GPU performance
