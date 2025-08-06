@@ -1,0 +1,41 @@
+FROM nvcr.io/nvidia/pytorch:23.10-py3
+
+ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=Asia/Tokyo
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    git \
+    ffmpeg \
+    libsndfile1 \
+    gcc \
+    g++ \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# Copy demucs source
+COPY . /app
+
+# Install Python dependencies
+RUN pip install --upgrade pip setuptools wheel
+
+# Install demucs dependencies
+RUN pip install -r requirements.txt
+
+# Install demucs in editable mode
+RUN pip install -e .
+
+# Create directories for input/output
+RUN mkdir -p /app/input /app/output
+
+# Set environment variables
+ENV PYTHONPATH=/app:$PYTHONPATH
+ENV CUDA_VISIBLE_DEVICES=0
+
+# Set working directory
+WORKDIR /app
+
+# Default command - show help
+CMD ["python", "-m", "demucs", "--help"]

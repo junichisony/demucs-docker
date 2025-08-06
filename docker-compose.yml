@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  demucs-docker:
+    image: demucs/demucs-docker:gpu
+    build:
+      context: .
+      dockerfile: ./Dockerfile.gpu
+    volumes:
+      - ./input:/app/input
+      - ./output:/app/output
+      - ./test.mp3:/app/test.mp3:ro
+    environment:
+      - CUDA_VISIBLE_DEVICES=0
+    runtime: nvidia
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    container_name: demucs-docker-gpu
+    tty: true
+    stdin_open: true
