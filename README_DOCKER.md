@@ -36,22 +36,6 @@ docker compose run --rm demucs-docker python -m demucs /app/input/song.mp3 -o /a
 docker compose run --rm demucs-docker python -m demucs /app/input/song.mp3 -o /app/output -n htdemucs_6s
 ```
 
-### Using the custom CLI wrapper (cli_example.py)
-
-```bash
-# Basic usage
-docker compose run --rm demucs-docker python cli_example.py /app/input/song.mp3
-
-# Save as MP3
-docker compose run --rm demucs-docker python cli_example.py /app/input/song.mp3 --mp3
-
-# Extract only vocals
-docker compose run --rm demucs-docker python cli_example.py /app/input/song.mp3 --two-stems vocals
-
-# Use a different model
-docker compose run --rm demucs-docker python cli_example.py /app/input/song.mp3 -m htdemucs_ft
-```
-
 ## Directory Structure
 
 - `input/` - Place your audio files here
